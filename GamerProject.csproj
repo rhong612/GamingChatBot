@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EC9DB2D3-50DC-4419-9E40-64F5B7616DD9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GamerProject</RootNamespace>
+    <AssemblyName>GamerProject</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AIMLbot">
+      <HintPath>.\AIMLbot.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChitchatState.cs" />
+    <Compile Include="Gamer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SleepState.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="StateFactory.cs" />
+    <Compile Include="WakeState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PluginSDK\PluginSDK.csproj">
+      <Project>{67161f85-556e-4def-9899-6464bdc55773}</Project>
+      <Name>PluginSDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\Library.csproj">
+      <Project>{898ecb12-d464-4514-ae2e-45fe430fe04e}</Project>
+      <Name>Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="AIML\Gamer\Bot.aiml" />
+    <None Include="AIML\Gamer\Chinese.aiml" />
+    <None Include="AIML\Gamer\Chitchat.aiml" />
+    <None Include="AIML\Gamer\Condition.aiml" />
+    <None Include="AIML\Gamer\Japanese.aiml" />
+    <None Include="AIML\Gamer\Knowledge.aiml" />
+    <None Include="AIML\Gamer\Salutations.aiml" />
+    <None Include="AIML\Gamer\Translation.aiml" />
+    <None Include="AIML\Gamer\User.aiml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AIML\config\DefaultPredicates.xml" />
+    <Content Include="AIML\config\GamerSettings.xml" />
+    <Content Include="AIML\config\GenderSubstitutions.xml" />
+    <Content Include="AIML\config\Person2Substitutions.xml" />
+    <Content Include="AIML\config\PersonSubstitutions.xml" />
+    <Content Include="AIML\config\Splitters.xml" />
+    <Content Include="AIML\config\Substitutions.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Y "$(TargetPath)" "$(SolutionDir)MultiDesktop\$(OutDir)"
+xcopy /I /Y "$(ProjectDir)AIML\Gamer" "$(SolutionDir)MultiDesktop\$(OutDir)Gamer"
+xcopy /Y "$(ProjectDir)AIML\config\GamerSettings.xml" "$(SolutionDir)MultiDesktop\$(OutDir)config\GamerSettings.xml"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
