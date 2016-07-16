@@ -22,7 +22,7 @@ namespace GamerProject
             if (counter == 0)
             {
                 gamer.Speak(gamer.getAIMLResponse("SayStatement I'm awake now", gamer.myUser));
-                gamer.NextState = State.GetState(State.WAKE);
+                gamer.NextState = State.GetState(new Random().Next(0,2) == 0 ? State.WAKE : State.CHITCHAT);
                 gamer.setChatStatus(ChatStatus.Available);
             }
         }

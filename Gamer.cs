@@ -12,7 +12,6 @@ using PluginSDK;
 
 namespace GamerProject
 {
-    public enum BotStatus {  Available, Sleep };
     public class Gamer : Bot, IFollowerPlugin
     {
         private Timer stateTicker;
@@ -20,8 +19,6 @@ namespace GamerProject
 
         public SortedList<string, User> Users { get; private set; }
         public User myUser { get; private set; }
-
-        
 
         class ConcreteProfile : IProfile
         {
